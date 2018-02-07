@@ -2,6 +2,8 @@ import React from "react";
 import { connect } from "react-redux";
 import actions from "../../actions";
 import { bindActionCreators } from "../../../../../../AppData/Local/Microsoft/TypeScript/2.6/node_modules/redux";
+import { Row, Col, Form, FormGroup, Button } from "react-bootstrap";
+import { FieldGroup } from "./formelemets";
 
 class TaskBar extends React.Component {
   constructor(props) {
@@ -26,31 +28,31 @@ class TaskBar extends React.Component {
   render() {
     console.log("taskbar", this.props);
     return (
-      <div className="row">
-        <div className="col">
-          <form>
-            <div className="form-group">
-              <input
+      <Row>
+        <Col>
+          <Form>
+            <FormGroup>
+              <FieldGroup
+                id="title"
                 type="text"
-                className="form-control"
                 name="title"
                 placeholder="Add todos..."
+                label="Title"
                 value={this.state.title}
                 onChange={this.handleChange}
-                ref="task"
               />
               <br />
-              <input
+              <FieldGroup
+                id="description"
                 type="text"
-                className="form-control"
                 name="description"
                 placeholder="Add Description..."
+                label="Description"
                 value={this.state.description}
                 onChange={this.handleChange}
-                ref="desc"
               />
               <br />
-              <button
+              <Button
                 className="btn btn-success"
                 onClick={() => {
                   if (this.props.store.id) {
@@ -70,14 +72,14 @@ class TaskBar extends React.Component {
                     );
                   }
                 }}
-                type="button"
+                type="submit"
               >
                 ADD!
-              </button>
-            </div>
-          </form>
-        </div>
-      </div>
+              </Button>
+            </FormGroup>
+          </Form>
+        </Col>
+      </Row>
     );
   }
 }
