@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import actions from "../../actions";
 import { bindActionCreators } from "../../../../../../AppData/Local/Microsoft/TypeScript/2.6/node_modules/redux";
-import { Row, Col, Form, FormGroup, Button } from "react-bootstrap";
+import { Row, Col, Form, Button } from "react-bootstrap";
 import { FieldGroup } from "./formelemets";
 
 class TaskBar extends React.Component {
@@ -28,58 +28,59 @@ class TaskBar extends React.Component {
   render() {
     console.log("taskbar", this.props);
     return (
-      <Row>
-        <Col>
-          <Form>
-            <FormGroup>
-              <FieldGroup
-                id="title"
-                type="text"
-                name="title"
-                placeholder="Add todos..."
-                label="Title"
-                value={this.state.title}
-                onChange={this.handleChange}
-              />
-              <br />
-              <FieldGroup
-                id="description"
-                type="text"
-                name="description"
-                placeholder="Add Description..."
-                label="Description"
-                value={this.state.description}
-                onChange={this.handleChange}
-              />
-              <br />
-              <Button
-                className="btn btn-success"
-                onClick={() => {
-                  if (this.props.store.id) {
-                    this.props.updateTask(
-                      this.props.store.id,
-                      this.state.title,
-                      this.state.description,
-                      this.props.store.createdon
-                    );
-                  } else {
-                    this.props.addTask(
-                      this.props.store.id,
-                      this.state.title,
-                      this.state.description,
-                      this.props.store.createdon,
-                      this.props.store.modifiedon
-                    );
-                  }
-                }}
-                type="submit"
-              >
-                ADD!
-              </Button>
-            </FormGroup>
-          </Form>
-        </Col>
-      </Row>
+      <Form>
+        <Row>
+          <Col lg={5}>
+            <FieldGroup
+              id="title"
+              type="text"
+              name="title"
+              placeholder="Add todos..."
+              label="Title"
+              value={this.state.title}
+              onChange={this.handleChange}
+            />
+          </Col>
+          <Col lg={5}>
+            <FieldGroup
+              id="description"
+              type="text"
+              name="description"
+              placeholder="Add Description..."
+              label="Description"
+              value={this.state.description}
+              onChange={this.handleChange}
+            />
+          </Col>
+          <Col lg={2}>
+            <Button
+              bsClass="btn"
+              bsStyle="success"
+              onClick={() => {
+                if (this.props.store.id) {
+                  this.props.updateTask(
+                    this.props.store.id,
+                    this.state.title,
+                    this.state.description,
+                    this.props.store.createdon
+                  );
+                } else {
+                  this.props.addTask(
+                    this.props.store.id,
+                    this.state.title,
+                    this.state.description,
+                    this.props.store.createdon,
+                    this.props.store.modifiedon
+                  );
+                }
+              }}
+              type="button"
+            >
+              ADD!
+            </Button>
+          </Col>
+        </Row>
+      </Form>
     );
   }
 }
